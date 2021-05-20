@@ -26,7 +26,7 @@ public class BannerView extends LinearLayout {
         initAds();
     }
 
-    private void initAds() {
+    public void initAds() {
         new BannerAdClass(getContext(), this);
     }
 

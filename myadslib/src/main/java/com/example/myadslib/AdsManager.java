@@ -1,5 +1,12 @@
 package com.example.myadslib;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Anurag Savaliya on 20-May-21.
  */
@@ -12,6 +19,9 @@ public class AdsManager {
     String fbInterstrial;
     boolean isGoogleShow;
     boolean isFbShow;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+
 
     public String getGoogleBanner() {
         return googleBanner;
@@ -75,5 +85,15 @@ public class AdsManager {
 
     public void setFbShow(boolean fbShow) {
         isFbShow = fbShow;
+    }
+
+
+    public void saveAll(Context context) {
+        this.pref = context.getSharedPreferences("myadspref", MODE_PRIVATE);
+        this.editor = this.pref.edit();
+
+
+        editor.putString("adsobj", new Gson().toJson(this));
+        editor.apply();
     }
 }
